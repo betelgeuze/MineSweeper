@@ -1,11 +1,10 @@
 package model;
 
-public class Tiles extends AbstractTile{
+public abstract class Tiles extends AbstractTile{
 
     private Boolean open = false;
     private Boolean isOpened = false;
     private Boolean isFlagged = false;
-    private Boolean isExplosive;
 
 
     @Override
@@ -29,9 +28,7 @@ public class Tiles extends AbstractTile{
     }
 
     @Override
-    public boolean isExplosive() {
-        return isExplosive;
-    }
+    public abstract boolean isExplosive();
 
     @Override
     public boolean isOpened() {

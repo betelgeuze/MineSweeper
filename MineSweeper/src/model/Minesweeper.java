@@ -6,7 +6,7 @@ import java.util.Collections;
 public class Minesweeper extends AbstractMineSweeper{
 
     private int rows,cols;
-    ArrayList<AbstractTile> tiles =new ArrayList<>();
+    ArrayList<Tiles> tiles =new ArrayList<>();
 
 //    int flag;
 
@@ -75,16 +75,18 @@ public class Minesweeper extends AbstractMineSweeper{
     }
 
 
+
     @Override
-    public AbstractTile getTile(int x, int y) {
-        AbstractTile tile = tiles.get(cols*(x-1)+y);
+    public Tiles getTile(int x, int y) {
+        Tiles tile = tiles.get(cols*(x-1)+y);
         return tile;
     }
 
 
+
     @Override
     public void toggleFlag(int x, int y) {
-        AbstractTile t;
+        Tiles t;
         t = getTile(x,y);
 
         if (t.isFlagged()){
@@ -100,7 +102,7 @@ public class Minesweeper extends AbstractMineSweeper{
 
     @Override
     public void open(int x, int y) {
-        AbstractTile t;
+        Tiles t;
         t = getTile(x,y);
 
         t.isOpened();
@@ -123,12 +125,13 @@ public class Minesweeper extends AbstractMineSweeper{
     }
 
     @Override
-    public AbstractTile generateEmptyTile() {
-        return null;
+    public Tiles generateEmptyTile() {
+        Tiles t = new normalTiles();
+        return t;
     }
 
     @Override
-    public AbstractTile generateExplosiveTile() {
+    public Tiles generateExplosiveTile() {
         return null;
     }
 }
