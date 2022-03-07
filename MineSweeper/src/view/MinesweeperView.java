@@ -54,28 +54,35 @@ public class MinesweeperView implements IGameStateNotifier {
         this.menuBar = new JMenuBar();
         this.gameMenu = new JMenu("New Game");
         this.menuBar.add(gameMenu);
-        
+
+
+        //-----------three different modes
         this.easyGame = new JMenuItem("Easy");
         this.gameMenu.add(this.easyGame);
         this.easyGame.addActionListener((ActionEvent e) -> {
             if (gameModel != null) 
                 gameModel.startNewGame(Difficulty.EASY);
         });
+
         this.mediumGame = new JMenuItem("Medium");
         this.gameMenu.add(this.mediumGame);
         this.mediumGame.addActionListener((ActionEvent e) -> {
             if (gameModel != null)
                 gameModel.startNewGame(Difficulty.MEDIUM);
         });
+
         this.hardGame = new JMenuItem("Hard");
         this.gameMenu.add(this.hardGame);
         this.hardGame.addActionListener((ActionEvent e) -> {
             if (gameModel != null)
                 gameModel.startNewGame(Difficulty.HARD);
         });
-        
+
+        //---------------set MenuBar
         this.window.setJMenuBar(this.menuBar);
 
+
+        //----------------define/assemble timer Icon
         try {
             JLabel clockIcon = new JLabel(new ImageIcon(ImageIO.read(new File(AssetPath.CLOCK_ICON))));
             clockIcon.setSize(new DimensionUIResource(10, 10));
@@ -85,6 +92,10 @@ public class MinesweeperView implements IGameStateNotifier {
         } catch (IOException e) {
             System.out.println("Unable to locate clock resource");
         }
+
+
+
+        //-----------------define/assemble flag panel: how many flags are set
         flagPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         try {
             JLabel clockIcon = new JLabel(new ImageIcon(ImageIO.read(new File(AssetPath.FLAG_ICON))));
@@ -96,6 +107,10 @@ public class MinesweeperView implements IGameStateNotifier {
             System.out.println("Unable to locate flag resource");
         }
 
+
+
+
+        //------------------------
         this.window.setLayout(new GridBagLayout());
         GridBagConstraints layoutConstraints = new GridBagConstraints();
         layoutConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
@@ -133,6 +148,11 @@ public class MinesweeperView implements IGameStateNotifier {
         }
         this.world.setVisible(true);
     }
+
+
+
+
+
 
     public MinesweeperView(PlayableMinesweeper gameModel) {
         this();
@@ -176,16 +196,24 @@ public class MinesweeperView implements IGameStateNotifier {
         this.world.setVisible(true);
         this.world.repaint();
     }
+
+
+
     @Override
     public void notifyGameLost() {
         this.removeAllTileEvents();
         //throw new UnsupportedOperationException();
     }
+
+
+
     @Override
     public void notifyGameWon() {
         this.removeAllTileEvents();
         throw new UnsupportedOperationException();
     }
+
+
 
     private void removeAllTileEvents() {
         for (int i=0; i<this.tiles.length; ++i)
@@ -193,10 +221,14 @@ public class MinesweeperView implements IGameStateNotifier {
                 this.tiles[i][j].removalAllMouseListeners();
     }
 
+
+
     @Override
     public void notifyFlagCountChanged(int newFlagCount) {
         this.flagCountView.setText(Integer.toString(newFlagCount));
     }
+
+
 
     @Override
     public void notifyTimeElapsedChanged(Duration newTimeElapsed) {
@@ -205,20 +237,28 @@ public class MinesweeperView implements IGameStateNotifier {
         
     }
 
+
+
     @Override
     public void notifyOpened(int x, int y, int explosiveNeighbourCount) {
         this.tiles[y][x].notifyOpened(explosiveNeighbourCount);
     }
+
+
 
     @Override
     public void notifyFlagged(int x, int y) {
         this.tiles[y][x].notifyFlagged();
     }
 
+
+
     @Override
     public void notifyUnflagged(int x, int y) {
         this.tiles[y][x].notifyUnflagged();
     }
+
+
 
     @Override
     public void notifyExploded(int x, int y) {
