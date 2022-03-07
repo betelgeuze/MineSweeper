@@ -24,7 +24,7 @@ public class Minesweeper extends AbstractMineSweeper{
     @Override
     public void startNewGame(Difficulty level) {
         if (level == Difficulty.EASY)
-        {   startNewGame(8,8,10);}
+        {   startNewGame(8,7,10);}
         if (level == Difficulty.MEDIUM)
         {   startNewGame(16,16,40);}
         if (level == Difficulty.HARD)
