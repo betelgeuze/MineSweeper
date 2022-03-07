@@ -8,6 +8,8 @@ import static org.junit.Assert.assertTrue;
 import java.time.Duration;
 import java.util.ArrayDeque;
 import java.util.Deque;
+
+import model.Minesweeper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,12 +27,13 @@ public class GameModelTester {
     @Before
     public void init() {
         //uncomment the line below once your game model code is ready for testing
-        //gameModel = new Minesweeper();
+        gameModel = new Minesweeper();
     }
 
     @Test
     public void testGeneratingEmptyTile() {
         TestableTile tile = gameModel.generateEmptyTile();
+
         assertNotNull(tile);
 
         tile.setTileNotifier(new MockTileStateNotifier() {

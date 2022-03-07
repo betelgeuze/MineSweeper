@@ -48,6 +48,8 @@ public class MinesweeperView implements IGameStateNotifier {
     private JLabel timerView = new JLabel();
     private JLabel flagCountView = new JLabel();
 
+
+
     public MinesweeperView() {
         this.window = new JFrame("Minesweeper");
         timerPanel.setLayout(new FlowLayout());
@@ -153,17 +155,21 @@ public class MinesweeperView implements IGameStateNotifier {
 
 
 
-
+//-------------------call method below
     public MinesweeperView(PlayableMinesweeper gameModel) {
         this();
         this.setGameModel(gameModel);
     }
 
+//-------------------call set game notifier in a certain game
     public void setGameModel(PlayableMinesweeper newGameModel) {
         this.gameModel = newGameModel;
         this.gameModel.setGameStateNotifier(this);
     }
 
+
+
+//------------------setup basic function of the game
     @Override
     public void notifyNewGame(int row, int col) {
         this.flagCountView.setText("0");
@@ -173,7 +179,9 @@ public class MinesweeperView implements IGameStateNotifier {
         this.tiles = new TileView[row][col];
         for (int i=0; i<row; ++i) {
             for (int j=0; j<col; ++j) {
-                TileView temp = new TileView(j, i); 
+                TileView temp = new TileView(j, i);
+
+
                 temp.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent arg0) {
@@ -187,6 +195,8 @@ public class MinesweeperView implements IGameStateNotifier {
                         } 
                     }
                 });
+
+
                 this.tiles[i][j] = temp;
                 this.world.add(temp);
             }
@@ -222,14 +232,14 @@ public class MinesweeperView implements IGameStateNotifier {
     }
 
 
-
+//--------------------update flag count
     @Override
     public void notifyFlagCountChanged(int newFlagCount) {
         this.flagCountView.setText(Integer.toString(newFlagCount));
     }
 
 
-
+//---------------------update time
     @Override
     public void notifyTimeElapsedChanged(Duration newTimeElapsed) {
         timerView.setText(
@@ -238,28 +248,28 @@ public class MinesweeperView implements IGameStateNotifier {
     }
 
 
-
+//---------------------flag count if opened yet not explode
     @Override
     public void notifyOpened(int x, int y, int explosiveNeighbourCount) {
         this.tiles[y][x].notifyOpened(explosiveNeighbourCount);
     }
 
 
-
+//-----------------------flagged
     @Override
     public void notifyFlagged(int x, int y) {
         this.tiles[y][x].notifyFlagged();
     }
 
 
-
+//------------------------unflagged
     @Override
     public void notifyUnflagged(int x, int y) {
         this.tiles[y][x].notifyUnflagged();
     }
 
 
-
+//------------------------exploded
     @Override
     public void notifyExploded(int x, int y) {
         this.tiles[y][x].notifyExplode();
