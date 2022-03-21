@@ -1,7 +1,7 @@
 package model;
 
 public class normalTiles extends Tiles{
-    private Boolean isExplosive = false;
+    private static Boolean isExplosive = false;
 
 
     @Override

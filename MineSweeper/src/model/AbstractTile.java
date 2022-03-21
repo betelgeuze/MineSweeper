@@ -13,4 +13,6 @@ public abstract class AbstractTile implements TestableTile {
     public final void setTileNotifier(ITileStateNotifier notifier) {
         this.viewNotifier = notifier;
     }
+
+    public abstract void initTile();
 }
